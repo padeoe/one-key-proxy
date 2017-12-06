@@ -10,17 +10,6 @@ read -p "input the port for ssl http proxy:, (default:5678):" port
 if [ "$port" = "" ]; then
     port=5678
 fi
-# 禁用 ipv6
-declare -a disable_ipv6_confs=("net.ipv6.conf.all.disable_ipv6=1" "net.ipv6.conf.default.disable_ipv6=1" "net.ipv6.conf.lo.disable_ipv6=1")
-for i in "${disable_ipv6_confs[@]}"
-do
-    if grep -q $i /etc/sysctl.conf;then
-        echo $i
-    else
-        echo $i | tee --append /etc/sysctl.conf
-    fi
-done
-sysctl -p
 
 # 安装软件
 apt-get update
