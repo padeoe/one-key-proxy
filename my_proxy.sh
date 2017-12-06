@@ -1,16 +1,6 @@
 # 用户输入基本信息
-read -p "SSL HTTP proxy must need a domain, (e.g., proxy.yourdomain.com),
-input a domain:" domain
-if [ "$domain" = "" ]; then
-    echo "No domain input, exit!"
-    exit 1
-fi
-
-read -p "input the port for ssl http proxy:, (default:5678):" port
-if [ "$port" = "" ]; then
-    port=5678
-fi
-
+domain=$1
+port=$2
 # 安装软件
 apt-get update
 apt-get install -y  git apt-transport-https
