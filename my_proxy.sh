@@ -1,13 +1,18 @@
-# 用户输入基本信息
+# 读取命令行参数
+if [ "$#" -ne 3 ]; then
+  echo "Usage: $0 DOMAIN PORT EMAIL" >&2
+  exit 1
+fi
 domain=$1
 port=$2
+email=$3
 # 安装软件
 apt-get update
 apt-get install -y  git apt-transport-https
 
 # 生成ssl证书
 git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
-/opt/letsencrypt/letsencrypt-auto certonly --standalone -d $domain
+/opt/letsencrypt/letsencrypt-auto certonly --quiet --agree-tos --email $email --standalone -d $domain
 
 # 安装erlang虚拟机
 declare -a sources=("deb https://packages.erlang-solutions.com/ubuntu trusty contrib" "deb https://packages.erlang-solutions.com/ubuntu saucy contrib" "deb https://packages.erlang-solutions.com/ubuntu precise contrib")
