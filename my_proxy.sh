@@ -56,7 +56,7 @@ https_startup_crontab='@reboot '$USER' '$script''
 if grep -q "$https_startup_crontab" /etc/crontab;then
     echo "ssl http proxy has been ready for startup on boot now!"
 else
-    echo '@reboot '$USER' '$script'' | sudo tee --append /etc/crontab
+    echo '@reboot '$USER' '$script'' | tee --append /etc/crontab
     echo "ssl http proxy can startup on boot now!"
 fi
 
